@@ -17,7 +17,6 @@ app.use("/api/v1/products", products);
 
 //
 //
-//
 
 //
 // error handler
