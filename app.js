@@ -10,7 +10,7 @@ var app = express();
 // middleware
 app.use(express.json());
 
-app.listen(process.env.PORT || 5000, function () {
+app.listen(process.env.PORT || 4200, function () {
   console.log("Server is running on localhost 5000");
 });
 
