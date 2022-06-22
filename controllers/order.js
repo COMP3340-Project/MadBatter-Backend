@@ -1,7 +1,7 @@
 var connection = require("../database/database");
 
 const getAllProducts = (req, res) => {
-  connection.query("SELECT * FROM product", function (err, rows) {
+  connection.query("SELECT * FROM order", function (err, rows) {
     if (err) {
       //   req.flash("error", err);
       res.send(rows);

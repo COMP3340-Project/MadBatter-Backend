@@ -16,12 +16,20 @@ app.listen(process.env.PORT || 4200, function () {
 
 // Setting up the routes
 const products = require("./routes/product");
+const productcategory = require("./routes/category");
+const users = require("./routes/user");
+const carts = require("./routes/cart");
+const orders = require("./routes/order");
 
 app.get("/", (req, res) => {
   res.send("I am Alive!! --MadBatter BackEnd");
 });
 
 app.use("/api/v1/products", products);
+app.use("/api/v1/productcategory", productcategory);
+app.use("/api/v1/users", users);
+app.use("/api/v1/carts", carts);
+app.use("/api/v1/orders", orders);
 
 //
 //
