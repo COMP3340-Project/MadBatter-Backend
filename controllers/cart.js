@@ -1,6 +1,6 @@
 var connection = require("../database/database");
 
-const getAllProducts = (req, res) => {
+const getAllCart = (req, res) => {
   connection.query("SELECT * FROM cart_item", function (err, rows) {
     if (err) {
       //   req.flash("error", err);
@@ -13,5 +13,5 @@ const getAllProducts = (req, res) => {
 };
 
 module.exports = {
-  getAllProducts,
+  getAllCart,
 };
