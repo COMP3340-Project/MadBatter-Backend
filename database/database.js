@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 const fs = require("fs");
 require("dotenv").config();
-
+const { mongoose } = require("mongoose");
 var config = {
   connectionLimit: 50,
   host: process.env.DB_HOST,
@@ -9,13 +9,9 @@ var config = {
   password: process.env.DB_PASSWORD,
   database: "madbatter",
   port: 3306,
-  ssl: {
-    ca: fs.readFileSync("BaltimoreCyberTrustRoot.crt.pem"),
-  },
 };
 /*
 const conn = new mysql.createConnection(config);
-
 conn.connect(function (err) {
   if (err) {
     console.log("!!! Cannot connect !!! Error:");
@@ -33,9 +29,6 @@ var conn = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: "madbatter",
   port: 3306,
-  ssl: {
-    ca: fs.readFileSync("BaltimoreCyberTrustRoot.crt.pem"),
-  },
 });
 
 conn.connect(function (err) {
