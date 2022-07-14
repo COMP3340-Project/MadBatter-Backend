@@ -4,13 +4,24 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var flash = require("express-flash");
 var bodyParser = require("body-parser");
+var cors = require("cors");
 
 var app = express();
 
+// To all allow all CORS
+app.use(cors());
 // middleware
 app.use(express.json());
 
-app.listen(process.env.PORT || 4200, function () {
+// Parse incoming requests
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
+
+app.listen(process.env.PORT || 3000, function () {
   console.log("Server is running on localhost 5000");
 });
 

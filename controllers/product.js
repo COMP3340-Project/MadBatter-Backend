@@ -2,32 +2,65 @@ var connection = require("../database/database");
 const Product = require("../models/product.model");
 
 const getAllProducts = (req, res) => {
-  connection.query("SELECT * FROM product", function (err, rows) {
-    if (err) {
-      //   req.flash("error", err);
-      res.send(rows);
-    } else {
-      res.send(rows);
-      console.log("Success !!!");
-    }
-  });
+  connection.query(
+    `
+    SELECT product.product_id, product.product_name, product.product_description, product_category.category_name
+    FROM product
+    INNER JOIN product_category ON product_category.category_id = product.category_id
+    where product.isDelete = 0 and product_category.isDelete = 0 
+    `,
+    function (err, rows) {
+      if (err) {
+        //   req.flash("error", err);
+        res.send(rows);
+      } else {
+        res.send(rows);
+        console.log("Success !!!");
+      }
+    },
+  );
 };
 
-const addProduct = async (req, res) => {
-  const { product_id, p_name, p_description, category_id, isDelete } = req.body;
-
+const createProduct = (req, res) => {
+  const { product_name, product_description, category_id } = req.body;
   connection.query(
-    `INSERT INTO product (product_id,p_name,p_description,category_id,isDelete) VALUES (${product_id},${p_name},${p_description},${category_id},${isDelete});`,
-    (error, results) => {
-      if (error) {
-        throw error;
+    `
+      INSERT INTO madbatter.product (product_name,product_description,category_id ,isDelete ) VALUES ("${product_name}","${product_description}",${category_id}, 0) 
+      `,
+    function (err, rows) {
+      if (err) {
+        req.flash("error", err);
+        res.send(rows);
+      } else {
+        res.send(rows);
+        console.log("Success !!!");
       }
-      response.status(201).send(`User added with ID: `);
-    }
+    },
+  );
+};
+
+const deleteProduct = (req, res) => {
+  const { product_name, category_id } = req.body;
+  connection.query(
+    `
+      UPDATE madbatter.product 
+      SET isDelete = 1
+      WHERE product_name = "${product_name}" AND category_id = "${category_id}" 
+      `,
+    function (err, rows) {
+      if (err) {
+        req.flash("error", err);
+        res.send(rows);
+      } else {
+        res.send(rows);
+        console.log("Success !!!");
+      }
+    },
   );
 };
 
 module.exports = {
   getAllProducts,
-  addProduct,
+  createProduct,
+  deleteProduct,
 };
