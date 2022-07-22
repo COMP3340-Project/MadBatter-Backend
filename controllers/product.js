@@ -1,6 +1,9 @@
 var connection = require("../database/database");
 const Product = require("../models/product.model");
 
+const http = require("http");
+const url = require("url");
+
 const getAllProducts = (req, res) => {
   connection.query(
     `
@@ -59,8 +62,30 @@ const deleteProduct = (req, res) => {
   );
 };
 
+const productDetails = (req, res) => {
+  const product_id = req.query.product_id;
+  const category_id = req.query.category_id;
+  connection.query(
+    `
+      SELECT * 
+      FROM product
+      where isDelete = 0 and product_id = ${product_id} AND category_id = ${category_id}
+      `,
+    function (err, rows) {
+      if (err) {
+        req.flash("error", err);
+        res.send(rows);
+      } else {
+        res.send(rows);
+        console.log("Success !!!");
+      }
+    },
+  );
+};
+
 module.exports = {
   getAllProducts,
   createProduct,
   deleteProduct,
+  productDetails,
 };
