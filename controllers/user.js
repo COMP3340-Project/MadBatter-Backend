@@ -38,6 +38,27 @@ const createUser = (req, res) => {
   );
 };
 
+const find = (req, res) => {
+  const user_email = req.query.user_email;
+  const user_password = req.query.user_password;
+  connection.query(
+    `
+    SELECT * 
+    FROM user
+    WHERE user_email = "${user_email}" AND user_password = "${user_password}" AND isDelete = 0
+    `,
+    function (err, rows) {
+      if (err) {
+        //   req.flash("error", err);
+        res.send(rows);
+      } else {
+        res.send(rows);
+        console.log("Success !!!");
+      }
+    },
+  );
+};
+
 const deleteuser = (req, res) => {
   const { user_name, user_email } = req.body;
   connection.query(
@@ -62,4 +83,5 @@ module.exports = {
   getAllUsers,
   createUser,
   deleteuser,
+  find,
 };
