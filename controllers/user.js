@@ -43,7 +43,7 @@ const find = (req, res) => {
   const user_password = req.query.user_password;
   connection.query(
     `
-    SELECT permission ,isDelete
+    SELECT permission 
     FROM user
     WHERE user_email = "${user_email}" AND user_password = "${user_password}" AND isDelete = 0
     `,
