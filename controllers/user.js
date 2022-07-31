@@ -24,7 +24,7 @@ const createUser = (req, res) => {
     req.body;
   connection.query(
     `
-      INSERT INTO madbatter.user (user_name,user_email,user_password, user_phone, user_address  ,isDelete ) VALUES ("${user_name}","${user_email}","${user_password}","${user_phone}","${user_address}", 0) 
+      INSERT INTO madbatter.user (user_name,user_email,user_password, user_phone, user_address  ,isDelete, permission ) VALUES ("${user_name}","${user_email}","${user_password}","${user_phone}","${user_address}", 0, "user") 
       `,
     function (err, rows) {
       if (err) {
@@ -41,9 +41,14 @@ const createUser = (req, res) => {
 const find = (req, res) => {
   const user_email = req.query.user_email;
   const user_password = req.query.user_password;
+
   connection.query(
     `
+<<<<<<< HEAD
     SELECT permission 
+=======
+    SELECT permission
+>>>>>>> ae03493c1925f13975fcf8fb9d071a947d6d34ff
     FROM user
     WHERE user_email = "${user_email}" AND user_password = "${user_password}" AND isDelete = 0
     `,
