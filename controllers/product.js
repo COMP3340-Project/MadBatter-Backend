@@ -62,6 +62,26 @@ const deleteProduct = (req, res) => {
   );
 };
 
+const productsbycatid = (req, res) => {
+  const category_id = req.query.category_id;
+  connection.query(
+    `
+      SELECT * 
+      FROM product
+      where isDelete = 0 and category_id = ${category_id}
+      `,
+    function (err, rows) {
+      if (err) {
+        req.flash("error", err);
+        res.send(rows);
+      } else {
+        res.send(rows);
+        console.log("Success !!!");
+      }
+    },
+  );
+};
+
 const productDetails = (req, res) => {
   const product_id = req.query.product_id;
   const category_id = req.query.category_id;
@@ -88,4 +108,5 @@ module.exports = {
   createProduct,
   deleteProduct,
   productDetails,
+  productsbycatid,
 };
