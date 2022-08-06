@@ -21,8 +21,9 @@ app.use(
   }),
 );
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log("Server is running on localhost 5000");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log("Express server listening on port", port);
 });
 
 // Setting up the routes
