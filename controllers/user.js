@@ -44,11 +44,7 @@ const find = (req, res) => {
 
   connection.query(
     `
-<<<<<<< HEAD
-    SELECT permission 
-=======
     SELECT permission
->>>>>>> ae03493c1925f13975fcf8fb9d071a947d6d34ff
     FROM user
     WHERE user_email = "${user_email}" AND user_password = "${user_password}" AND isDelete = 0
     `,

@@ -32,6 +32,7 @@ const productcategory = require("./routes/category");
 const users = require("./routes/user");
 const carts = require("./routes/cart");
 const orders = require("./routes/order");
+const theme = require("./routes/theme");
 
 app.get("/", (req, res) => {
   res.send("I am Alive!! --MadBatter BackEnd");
@@ -42,6 +43,7 @@ app.use("/api/v1/productcategory", productcategory);
 app.use("/api/v1/users", users);
 app.use("/api/v1/carts", carts);
 app.use("/api/v1/orders", orders);
+app.use("/api/v1/theme", theme);
 
 //
 //
